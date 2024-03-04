@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
@@ -11,6 +12,7 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  bool _passwordVisible = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,36 +52,44 @@ class _LogInState extends State<LogIn> {
                 SizedBox(
                   height: 0,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 200),
+                Align(
+                  alignment: Alignment.centerRight,
+                  // padding: const EdgeInsets.only(left: 200),
                   child: Text(
                     "Forget Password?",
                     style: TextStyle(fontWeight: FontWeight.w500),
+                    // textAlign: TextAlign,
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 45),
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  width: 250,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  // color: Colors.amber,
+                  alignment: Alignment.center,
                   child: ElevatedButton(
-                    child: Container(
-                      width: 250,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.check, color: Colors.blue),
-                          const Text(
-                            ' LOG IN',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 15),
-                          ),
-                        ],
-                      ),
+                    // child:
+                    //  Container(
+                    //   width: 250,
+                    //   padding:
+                    //       EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.check, color: Colors.blue),
+                        const Text(
+                          ' LOG IN',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 15),
+                        ),
+                      ],
+                      // ),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
@@ -141,22 +151,21 @@ class _TextField extends StatefulWidget {
 }
 
 class _TextFieldState extends State<_TextField> {
+  bool _passwordVisible = false;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   passwordVisible = false;
+  // }
+
   @override
   Widget build(BuildContext context) {
-    bool passwordVisible = true;
-
-    @override
-    void initState() {
-      super.initState();
-      passwordVisible = false;
-    }
-
     return Container(
       margin: EdgeInsets.symmetric(vertical: 25, horizontal: 15),
       child: Column(
         children: [
-          Container(
-              child: TextField(
+          TextField(
             decoration: InputDecoration(
               hintText: "Username or Email Address",
               hintStyle: TextStyle(
@@ -170,30 +179,36 @@ class _TextFieldState extends State<_TextField> {
                     color: Color.fromARGB(102, 158, 158, 158), width: 0.5),
               ),
             ),
-          )),
+          ),
           SizedBox(
             height: 20,
           ),
-          Container(
-              child: TextField(
+          TextField(
             keyboardType: TextInputType.visiblePassword,
             textInputAction: TextInputAction.done,
-            obscureText: passwordVisible,
+            obscureText: _passwordVisible,
             decoration: InputDecoration(
               hintText: "Password",
               hintStyle: TextStyle(
                   color: Colors.grey[400], fontWeight: FontWeight.w500),
               suffixIcon: IconButton(
-                icon: Icon(
-                  // Based on passwordVisible state choose the icon
-                  passwordVisible ? Icons.visibility : Icons.visibility_off,
-                  color: Colors.grey[400],
-                ),
+                icon: _passwordVisible
+                    ? Icon(
+                        // Based on passwordVisible state choose the icon
+                        Icons.visibility,
+                        color: Colors.grey[400],
+                      )
+                    : Icon(
+                        // Based on passwordVisible state choose the icon
+                        Icons.visibility_off,
+                        color: Colors.grey[400],
+                      ),
                 onPressed: () {
                   // Update the state i.e. toogle the state of passwordVisible variable
                   setState(() {
-                    passwordVisible = !passwordVisible;
+                    _passwordVisible = !_passwordVisible;
                   });
+                  print("visible: $_passwordVisible");
                 },
               ),
               // alignLabelWithHint: false,
@@ -206,7 +221,7 @@ class _TextFieldState extends State<_TextField> {
                     color: Color.fromARGB(102, 158, 158, 158), width: 0.5),
               ),
             ),
-          )),
+          ),
         ],
       ),
     );

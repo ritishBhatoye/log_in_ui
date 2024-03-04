@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:log_in_ui/Screen/discover.dart';
 import 'package:log_in_ui/Screen/login.dart';
 import 'package:log_in_ui/Screen/signup.dart';
 

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -13,37 +15,50 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          // titleSpacing: 10,
           toolbarHeight: 300,
-          title: Container(
-            width: 100,
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 40),
-                  width: 90,
-                  child: Image.asset(
-                    "assets/icons/user-3.png",
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            Container(
-              width: 100,
-              padding: EdgeInsets.only(top: 210, right: 10),
-              child: Text(
-                "LogIn",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 27,
-                ),
-              ),
-            ),
-          ],
+          // title: Column(
+          //   mainAxisAlignment: MainAxisAlignment.end,
+          //   children: [
+          //     // Container(
+          //     // margin: EdgeInsets.only(top: 40),
+          //     // width: 90,
+          //     // child:
+          //     Image.asset(
+          //       "assets/icons/user-3.png",
+          //       color: Colors.white,
+          //       width: 90,
+          //     ),
+          //     // ),
+          //     Align(
+          //       alignment: Alignment.bottomRight,
+          //       child: Text(
+          //         "LogIn",
+          //         style: TextStyle(
+          //           color: Colors.white,
+          //           fontWeight: FontWeight.w800,
+          //           fontSize: 27,
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // actions: [
+          //   Container(
+          //     width: 100,
+          //     padding: EdgeInsets.only(top: 210, right: 10),
+          //     child: Text(
+          //       "LogIn",
+          //       style: TextStyle(
+          //         color: Colors.white,
+          //         fontWeight: FontWeight.w800,
+          //         fontSize: 27,
+          //       ),
+          //     ),
+          //   ),
+          // ],
           flexibleSpace: Container(
+            padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(150)),
               gradient: LinearGradient(
@@ -54,6 +69,36 @@ class _SignUpState extends State<SignUp> {
                   const Color.fromARGB(180, 255, 153, 0),
                 ],
               ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                // Container(
+                // margin: EdgeInsets.only(top: 40),
+                // width: 90,
+                // child:
+                Image.asset(
+                  "assets/icons/user-3.png",
+                  color: Colors.white,
+                  width: 90,
+                ),
+                // ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Text(
+                    "LogIn",
+                    style: GoogleFonts.roboto(
+                      fontStyle: FontStyle.normal,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 27,
+                    ),
+                  ),
+                ),
+                // SizedBox(
+                //   height: 50,
+                // )
+              ],
             ),
           ),
 
@@ -83,21 +128,27 @@ class _SignUpState extends State<SignUp> {
                 //   ],
                 // ),
 
-                SizedBox(
-                  height: 15,
-                ),
+                // SizedBox(
+                //   height: 15,
+                // ),
+                Gap(15),
                 _TextField(),
                 SizedBox(
                   height: 0,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 200),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 200),
+                //   child:
+                Align(
+                  alignment: Alignment.centerRight,
                   child: Text(
                     "Forget Password?",
                     style: TextStyle(
                         color: Colors.orange, fontWeight: FontWeight.w500),
+                    // textAlign: TextAlign.right,
                   ),
                 ),
+                // ),
                 SizedBox(
                   height: 20,
                 ),
@@ -124,7 +175,24 @@ class _SignUpState extends State<SignUp> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange,
                     ),
-                    onPressed: () {},
+                    onPressed: () => showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Educative Alert'),
+                        content: const Text(
+                            'Here we can add the description of the alert'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 Container(
